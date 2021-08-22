@@ -1,0 +1,47 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+function loadData() {
+    var xmlhttp = new XMLHttpRequest();
+	
+    //var data=new FormData();
+	//data.append("id","neo");
+	//data.append("pass","neo");
+	//data.append("Name","neo");
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+           if (xmlhttp.status == 200) {
+               alert(xmlhttp.responseText);
+           }
+           else if (xmlhttp.status == 400) {
+              alert('There was an error 400');
+           }
+           else {
+               alert('something else other than 200 was returned');
+			   alert(xmlhttp.status);
+           }
+        }
+    };
+
+    xmlhttp.open("GET", "http://localhost:8080/getAllBooks", true);
+    xmlhttp.send();
+}
+
+
+loadData();
+</script>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        
+        <hr/>
+        <p id="result">
+            
+        </p>
+        <hr/>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+   <head>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../../assets/js/bootstrap.min.js"></script>
+	 <script src="../../assets/js/controller.js"></script>
+	<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../assets/css/bootstrap-theme.min.css" rel="stylesheet">
+
+      <title>Book Management</title>
+      <style>
+input.ng-invalid {
+    background-color: pink;
+}
+input.ng-valid {
+    background-color: lightgreen;
+}
+table th,td 
+{
+	padding : 5px;
+	border-collapse : collapse;
+}
+table tr:nth-child(odd)
+{
+background-color: ##f1f1f1;
+}
+table tr:nth-child(even)
+{
+background-color:f5f5f5;
+}
+</style>
+     
+   </head>
+   <body>
+        <h2>Book Management</h2>
+        <div ng-app="bo" ng-controller = "bookController">
+      
+         <table class="table table-stripped">
+            <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Author</th>
+			   <th>Action</th>
+               
+            </tr>
+         
+            <tr data-ng-repeat = "book in library">
+               <td>
+					
+					<div >{{ book.id }}</div>
+					
+			   </td>
+			   <form name="myForm">
+			   <td>
+					
+					<div ng-hide="editingData[book.id]">{{ book.name }}</div>
+					<div ng-show="editingData[book.id]"><input name="name" type="text" ng-model="book.name" required/></div>
+			   </td>
+			   <td>
+					
+					<div ng-hide="editingData[book.id]">{{ book.author }}</div>
+					<div ng-show="editingData[book.id]"><input type="text" name="author" ng-model="book.author" required/></div>
+			   </td>
+			   <td>
+			   
+					<button ng-hide="editingData[book.id]" class="btn btn-info" ng-click="modify(book)">Modify</button>
+					<button ng-show="editingData[book.id]" class="btn btn-success" ng-click="update(book)">Update</button>
+					<input type="button" class="btn btn-danger" ng-click="removeRow($index)" value="Delete"/>&nbsp;&nbsp;
+				</td>
+				</form>
+            </tr>
+         </table>
+        
+	    <div style="margin-top:20px">
+			
+			<form ng-submit="addRow()">
+				&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-success" value="Add New Book" >
+			</form>
+	    </div>
+
+		</div>
+      
+      
+      
+     
+      
+   </body>
+</html>

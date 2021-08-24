@@ -9,6 +9,7 @@ import frameworks.RequestEntities.Confirmation;
 import frameworks.ResponsePattern;
 import models.FlightDetails;
 import models.UserProfiles;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
@@ -17,6 +18,7 @@ import ninja.params.PathParam;
 import java.text.SimpleDateFormat;
 
 @Singleton
+@FilterWith(CORSFilter.class)
 public class FlightDataController {
     @Inject
     FlightDetailsDAO fdd;
@@ -58,18 +60,20 @@ public class FlightDataController {
             if(filter.equals("arrival_time")){
                 return Results.json().render(fdd.getFlightByArrivalTime(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(args)));
             }
+            if(filter.equals("source")){
+                return Results.json().render(fdd.getFlightBySource(args));
+            }
+            if(filter.equals("destination")){
+                return Results.json().render(fdd.getFlightByDestination(args));
+            }
+            if(filter.equals("flight_id")){
+                return Results.json().render(fdd.getFlightById(Long.parseLong(args)));
+            }
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        if(filter.equals("source")){
-            return Results.json().render(fdd.getFlightBySource(args));
-        }
-
-        else{
-            return Results.json().render("Invalid filter or args");
-        }
-
+        return Results.json().render("Invalid filter or args");
     }
 
     public Result addFlightDetail(FlightDetails fd){

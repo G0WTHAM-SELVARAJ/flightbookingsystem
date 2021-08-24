@@ -7,12 +7,14 @@ import dao.UserBookingHistoriesDAO;
 import dao.UserProfilesDAO;
 import frameworks.ResponsePattern;
 import models.UserBookingHistories;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
 import ninja.params.PathParam;
 
 @Singleton
+@FilterWith(CORSFilter.class)
 public class UserDataController {
     @Inject
     UserProfilesDAO upd;

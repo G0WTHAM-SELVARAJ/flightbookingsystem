@@ -97,7 +97,7 @@ public class FlightBookingsDAO {
             em.createQuery("UPDATE FlightBookings SET currCapacity = currCapacity -1 " +
                     "where flight.flight_id= ?1").setParameter(1,flightID).executeUpdate();
 
-            UserBookingHistories ubh = (UserBookingHistories ) em.createQuery("SELECT * FROM UserBookingHistories " +
+            UserBookingHistories ubh = (UserBookingHistories ) em.createQuery("FROM UserBookingHistories " +
                             "WHERE flightBooking.bookingId= ?1 AND user.user_id= ?2")
                     .setParameter(1,booking_id).setParameter(2,userId).getSingleResult();
 

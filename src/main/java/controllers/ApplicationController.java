@@ -21,6 +21,7 @@ import ninja.Results;
 import com.google.inject.Singleton;
 import ninja.FilterWith;
 
+
 @Singleton
 @FilterWith(CORSFilter.class)
 public class ApplicationController {

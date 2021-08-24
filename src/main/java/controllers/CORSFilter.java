@@ -16,8 +16,8 @@ public class CORSFilter implements Filter {
         }
         result = filterChain.next(context);
         result.addHeader("Access-Control-Allow-Origin", "*");
+        result.addHeader("Access-Control-Max-Age", "60000");
 	result.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
-	result.addHeader("Access-Control-Max-Age", "0");
 	result.addHeader("Access-Control-Allow-Headers", "Content-type, application/json");
         return result;
     }

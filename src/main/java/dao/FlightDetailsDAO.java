@@ -119,12 +119,13 @@ public class FlightDetailsDAO {
     }
 
     @UnitOfWork
-    public List<FlightDetails> getFlightBySource(String source_destination){
+    public List<FlightDetails> getFlightBySource(String source_location){
         EntityManager em = null;
         List<FlightDetails> fd = null;
         try{
             em = entityManagerProvider.get();
-            fd = (List<FlightDetails>) em.createQuery("FROM FlightDetails WHERE flight_source_location LIKE ?1").setParameter(1,source_destination+"%").getResultList();
+            fd = (List<FlightDetails>) em.createQuery("FROM FlightDetails WHERE flight_source_location LIKE ?1")
+                    .setParameter(1,source_location+"%").getResultList();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -133,6 +134,24 @@ public class FlightDetailsDAO {
             return fd;
         }
     }
+
+    @UnitOfWork
+    public List<FlightDetails> getFlightByDestination(String destination_location){
+        EntityManager em = null;
+        List<FlightDetails> fd = null;
+        try{
+            em = entityManagerProvider.get();
+            fd = (List<FlightDetails>) em.createQuery("FROM FlightDetails WHERE flight_destination_location LIKE ?1")
+                    .setParameter(1,destination_location+"%").getResultList();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            return fd;
+        }
+    }
+
 
     @UnitOfWork
     public FlightDetails getFlightById(Long flightId){

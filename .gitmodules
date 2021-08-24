@@ -1,0 +1,3 @@
+[submodule "src/main/ui"]
+	path = src/main/ui
+	url = https://github.com/G0WTHAM-SELVARAJ/fbs-ui.git
